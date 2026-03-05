@@ -1,4 +1,4 @@
-﻿using FilmesContext.WebAPI.Models;
+﻿using Filmes.WebAPI.Models;
 
 namespace FilmesContext.WebAPI.Interface;
 

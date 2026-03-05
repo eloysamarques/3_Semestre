@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace FilmesContext.WebAPI.Models;
+namespace Filmes.WebAPI.Models;
 
 [Table("Genero")]
 public partial class Genero

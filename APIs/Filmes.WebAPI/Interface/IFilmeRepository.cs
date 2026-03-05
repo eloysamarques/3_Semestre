@@ -1,13 +1,14 @@
-﻿using FilmesContext.WebAPI.Models;
+﻿using Filmes.WebAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesContext.WebAPI.Interface;
 
-public interface IFilmeRepository
+public interface IFilmesRepository
 {
-    void Cadastrar(Models.Filme novoFilme);
-    void AtualizarIdCorpo(Models.Filme filmeAtualizado);
-    void AtualizarIdUrl(Guid id, Models.Filme filmeAtualizado);
-    List<Models.Filme> Listar();
+    void Cadastrar(Filme novoFilme);
+    void AtualizarIdCorpo(Filme filmeAtualizado);
+    void AtualizarIdUrl(Guid id, Filme filmeAtualizado);
+    List<Filme> Listar();
     void Deletar(Guid id);
-    Models.Filme BuscarPorId(Guid id);
+    Filme BuscarPorId(Guid id);
 }

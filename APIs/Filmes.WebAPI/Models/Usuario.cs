@@ -4,9 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace FilmesContext.WebAPI.Models;
+namespace Filmes.WebAPI.Models;
 
 [Table("Usuario")]
+[Index("Email", Name = "UQ_Usuario_Email", IsUnique = true)]
 public partial class Usuario
 {
     [Key]
@@ -21,4 +22,8 @@ public partial class Usuario
     [StringLength(100)]
     [Unicode(false)]
     public string Senha { get; set; } = null!;
+
+    [StringLength(256)]
+    [Unicode(false)]
+    public string? Email { get; set; }
 }

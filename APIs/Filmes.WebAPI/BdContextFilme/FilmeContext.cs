@@ -1,4 +1,6 @@
-﻿using FilmesContext.WebAPI.Models;
+﻿using System;
+using System.Collections.Generic;
+using Filmes.WebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Filmes.WebAPI.BdContextFilme;
@@ -22,25 +24,25 @@ public partial class FilmeContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=FilmesBD_Torloni;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Filmes;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Filme>(entity =>
         {
-            entity.HasKey(e => e.IdFilme).HasName("PK__Filme__6E8F2A76AC3C5E25");
+            entity.HasKey(e => e.IdFilmes).HasName("PK__Filmes__0853FB86F72F4D04");
 
-            entity.HasOne(d => d.IdGeneroNavigation).WithMany(p => p.Filmes).HasConstraintName("FK__Filme__IdGenero__4CA06362");
+            entity.HasOne(d => d.IdGeneroNavigation).WithMany(p => p.Filmes).HasConstraintName("FK__Filmes__IdGenero__5EBF139D");
         });
 
         modelBuilder.Entity<Genero>(entity =>
         {
-            entity.HasKey(e => e.IdGenero).HasName("PK__Genero__0F8349887BEFB32B");
+            entity.HasKey(e => e.IdGenero).HasName("PK__Genero__0F834988DA4CB615");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF976305303F");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF979AE90882");
         });
 
         OnModelCreatingPartial(modelBuilder);

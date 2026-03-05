@@ -2,6 +2,10 @@ using Filmes.WebAPI.Repositories;
 using Filmes.WebAPI.BdContextFilme;
 using FilmesContext.WebAPI.Interface;
 using Microsoft.EntityFrameworkCore;
+using Filmes.WebAPI.Interface;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +15,117 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 // Adiona o repositório ao container de injeção de dependência 
 builder.Services.AddScoped<IGeneroRepository, GeneroRepository>();
-builder.Services.AddScoped<IFilmeRepository, FilmeRepository>();
+builder.Services.AddScoped<IFilmesRepository, FilmeRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+//Adiciona o serviço de Jet Bearer(Autenticacao)
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "JwtBearer";
+    options.DefaultChallengeScheme = "JwtBearer";
+})
+
+.AddJwtBearer("JwtBearer", options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+
+        //Valida quem esta solicitando
+        ValidateIssuer = true,
+
+        //Valida quem esta recebendo
+        ValidateAudience = true,
+
+        //Define se o tempo de expiração do token deve ser validado
+        ValidateLifetime = true,
+
+        //Forma de cripotrografia e valida a chave de autenticacao
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("filmes-chave-autenticacao-webapi-dev")),
+
+        //Valida o tempo de expiração do token
+        ClockSkew = TimeSpan.FromMinutes(5),
+
+        //Nome do issuer (de onde esta vindo)
+        ValidIssuer = "api_filmes",
+
+        //Nome do audience (para onde vai)
+        ValidAudience = "api_filmes"
+    };
+});
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Filmes APIs",
+        Description = "Uma API com catálogo de filmes",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "eloysamarqs_",
+            Url = new Uri("https://github.com/eloysamarques")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Exemple License",
+            Url = new Uri("https://exemple.com/licenses")
+        }
+    });
+
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Insira o token JWT "
+    });
+
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("Bearer", document)] = 
+        Array.Empty<string>().ToList()
+    });
+
+ });
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 
 // Adiciona o serviço de Controllers
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+if(app.Environment.IsDevelopment())
+{
+    app.UseSwagger( options => { });
+
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json","v1");
+        options.RoutePrefix = string.Empty;
+    });
+}
+
+app.UseStaticFiles();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 // Adiciona o mapeamento de Controllers
 app.MapControllers();
