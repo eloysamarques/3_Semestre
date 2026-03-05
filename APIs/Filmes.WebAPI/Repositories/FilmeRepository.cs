@@ -117,7 +117,7 @@ public class FilmeRepository : IFilmesRepository
     {
         try
         {
-            List<Filme> listaFilmes = _context.Filmes.ToList();
+            List<Filme> listaFilmes = _context.Filmes.ToList(); 
             return listaFilmes;
         }
         catch (Exception)

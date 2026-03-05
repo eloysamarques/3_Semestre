@@ -21,8 +21,8 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 //Adiciona o serviço de Jet Bearer(Autenticacao)
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = "JwtBearer";
-    options.DefaultChallengeScheme = "JwtBearer";
+    options.DefaultAuthenticateScheme = "JwtBearer"; //
+    options.DefaultChallengeScheme = "JwtBearer"; //
 })
 
 .AddJwtBearer("JwtBearer", options =>
