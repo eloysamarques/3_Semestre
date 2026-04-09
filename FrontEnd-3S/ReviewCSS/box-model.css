@@ -1,0 +1,23 @@
+
+body {
+    background-color: aquamarine;
+}
+
+.caixa {
+    box-sizing: border-box;
+    /*box-sizing: border-box;  Define o modelo de caixa como border-box */
+    width: 200px; /* Largura do conteúdo */
+    height: 200px; /* Altura do conteúdo */
+
+    padding-top: 20px; /* Espaçamento interno superior */
+    padding-bottom: 20px; /* Espaçamento interno inferior */
+    padding-right: 20px; /* Espaçamento interno direito */
+    padding-left: 20px; /* Espaçamento interno esquerdo */
+    
+    margin-top: 20px; /* Espaçamento externo superior */
+    margin-bottom: 40px; /* Espaçamento externo inferior */
+    margin-right: 30px; /* Espaçamento externo direito */
+    margin-left: 50px; /* Espaçamento externo esquerdo */
+
+    border: 2px solid black; /* Borda da caixa */
+}

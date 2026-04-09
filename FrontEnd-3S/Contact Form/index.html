@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Contatos</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header class="form-header">
+        <div class="container container--flex">
+            <img src="./images/Vector.svg" alt="imagem de um contato" class="form-header__image-perfil">
+
+            <h1 class="form-header__title">Contact Form</h1>
+            <p class="form-header__subtitulo">Insira os dados do contato e clique em "Cadastrar"</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <form class="form-contact" action="">
+                <div class="form-contact__linha">
+                    <div class="form-contact__col-a">
+                        <label class="form-contact__label" for="nome">Nome</label>
+                    </div>
+                    <div class="form-contact__col-b">
+                        <input class="form-contact__input form-contact__input--metade" type="text" id="nome" name="nome"
+                            placeholder="Nome">
+                        <input class="form-contact__input form-contact__input--metade" type="text" name="sobrenome"
+                            id="sobrenome" placeholder="Sobrenome">
+                    </div>
+                </div>
+
+
+                <div class="form-contact__linha">
+                    <div class="form-contact__col-a">
+                        <label class="form-contact__label" for="email">Email</label>
+                    </div>
+                    <div class="form-contact__col-b">
+                        <input class="form-contact__input form-contact__input--email" type="email" id="email" name="email"
+                            placeholder="exemplo@email.com">
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        Todos os direitos reservados
+    </footer>
+
+</body>
+
+</html>

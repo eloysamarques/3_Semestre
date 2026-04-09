@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sessao-noticias {
+    width: 920px;
+    height: 800px;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+    padding: 20px;
+    border: 1px dashed salmon;
+
+    margin:auto;
+}
+
+.noticia {
+    width: 150px;
+    height: 150px;
+    background-color: rgb(197, 35, 35);
+    color: white;
+
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    flex-direction: column;
+}
