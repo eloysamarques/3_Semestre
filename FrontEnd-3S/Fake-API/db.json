@@ -1,0 +1,36 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "ELoysa",
+      "idade": 17,
+      "email": "elo@gmail.com"
+    },
+    {
+      "id": "2",
+      "nome": "Guilherme Soares",
+      "idade": 17,
+      "email": "gui@gmail.com"
+    },
+    {
+      "id": "mXszziJi3Lw"
+    },
+    {
+      "id": "tMm9kJq0tI0",
+      "nome": "Nina",
+      "email": "nina@gmail.com",
+      "idade": 3
+    }
+  ],
+  "frutas": [],
+  "jogos": [],
+  "postagens": [
+    {
+      "texto": "Jetta GLI",
+      "imagens": "https://www.autossegredos.com.br/wp-content/uploads/2019/10/teste-vw-jetta-gli-23.jpg",
+      "qtdCurtidas": "100.000",
+      "id": "0hlREVeUYZo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
