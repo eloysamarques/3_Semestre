@@ -72,6 +72,93 @@
       "imc": 44.44444444444444,
       "situacao": "Obesidade Grau III (mórbida)",
       "id": "DJKyd1CDyIU"
+    },
+    {
+      "nome": "Lu",
+      "altura": 1.59,
+      "peso": 63,
+      "imc": 24.919900320398717,
+      "situacao": "Saudável",
+      "id": "oBJietbOLe0"
+    }
+  ],
+  "calculadora": [
+    {
+      "n1": 34,
+      "n2": 45,
+      "op": "soma",
+      "resultado": "79.00",
+      "id": "EIeepuhaySw"
+    },
+    {
+      "n1": 100,
+      "n2": 1,
+      "op": "subtracao",
+      "resultado": "99.00",
+      "id": "XGFdaw_KdzQ"
+    },
+    {
+      "n1": 34,
+      "n2": 3535,
+      "op": "multiplicacao",
+      "resultado": "120190.00",
+      "id": "upB80JjwBCI"
+    },
+    {
+      "n1": 46,
+      "n2": 345,
+      "op": "multiplicacao",
+      "resultado": "15870.00",
+      "id": "jsoHQfJEWTo"
+    },
+    {
+      "n1": 234,
+      "n2": 345,
+      "op": "soma",
+      "resultado": "579.00",
+      "id": "bJ68KgOyx6Q"
+    },
+    {
+      "n1": 234,
+      "n2": 345,
+      "op": "soma",
+      "resultado": "579.00",
+      "id": "BrcH4lgVMsA"
+    },
+    {
+      "n1": 234,
+      "n2": 345,
+      "op": "soma",
+      "resultado": "579.00",
+      "id": "N_24AeXEBDI"
+    },
+    {
+      "n1": 234,
+      "n2": 345,
+      "op": "soma",
+      "resultado": "579.00",
+      "id": "wlWDuSTDQVQ"
+    },
+    {
+      "n1": 234,
+      "n2": 345,
+      "op": "soma",
+      "resultado": "579.00",
+      "id": "Xu2bNV89E6g"
+    },
+    {
+      "n1": 234,
+      "n2": 345,
+      "op": "soma",
+      "resultado": "579.00",
+      "id": "8-MwDAVvF7E"
+    },
+    {
+      "n1": 234,
+      "n2": 345,
+      "op": "multiplicacao",
+      "resultado": "80730.00",
+      "id": "fLPZi0-5bhs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
