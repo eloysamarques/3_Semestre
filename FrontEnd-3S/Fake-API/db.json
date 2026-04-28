@@ -32,5 +32,47 @@
       "id": "0hlREVeUYZo"
     }
   ],
+  "imc": [
+    {
+      "nome": "Eloysa",
+      "altura": 1.6,
+      "peso": 50,
+      "imc": 19.531249999999996,
+      "situacao": "Saudável",
+      "id": "54dRiJ5QlS0"
+    },
+    {
+      "nome": "Guilherme",
+      "altura": 1.68,
+      "peso": 68,
+      "imc": 24.092970521541954,
+      "situacao": "Saudável",
+      "id": "C244iYhh4YM"
+    },
+    {
+      "nome": "Ana",
+      "altura": 1.98,
+      "peso": 50,
+      "imc": 12.753800632588511,
+      "situacao": "Magreza grave",
+      "id": "tGmvUR1hcMQ"
+    },
+    {
+      "nome": "Bia",
+      "altura": 1.36,
+      "peso": 35,
+      "imc": 18.923010380622834,
+      "situacao": "Saudável",
+      "id": "eX5F6CS96CM"
+    },
+    {
+      "nome": "nina",
+      "altura": 0.3,
+      "peso": 4,
+      "imc": 44.44444444444444,
+      "situacao": "Obesidade Grau III (mórbida)",
+      "id": "DJKyd1CDyIU"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
