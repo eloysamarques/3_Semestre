@@ -1,0 +1,8 @@
+.perfil-card {
+  margin: 10px auto;
+  width: 360px;
+  background: linear-gradient(135deg, hwb(229 39% 31%) 0%, #897b96 100%);
+  color: white;
+  border-radius: 5px;
+  
+}

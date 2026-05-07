@@ -1,0 +1,19 @@
+.jogo-card {
+    margin: 10px auto;
+    width: 350px;
+    background: linear-gradient(135deg, hwb(229 39% 31%) 0%, #897b96 100%);
+    border-radius: 5px;
+    color: white;
+    /*espaco em cima*/
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.jogo-imagem {
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+}   
