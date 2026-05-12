@@ -1,36 +1,53 @@
-import { useState } from 'react'
+import { useState } from "react"
+import Contador from "./assets/componentes/contador/contador"
+import CadFruta from "./assets/componentes/cadFruta/cadFruta"
+import CicloDeVida from "./assets/componentes/ciclodevida/ciclodevida"
 
 function App () {
-  // obejto privado
-  const [nome, setNome] = useState("Google")
-
-  function trocarTexto () {
+  const[mostrar, setMostar] = useState(true)
+  // objeto privado
+  const[nome, setNome] = useState("Google")
+  
+  function trocartexto() {
     setNome("Microsoft")
   }
-  function fuiAbandonada () {
-    setNome("Input foi abandonada")
-  }
 
-  return (
-    <> 
+  function fuiAbandonado() {
+    setNome("Fui abandonado")
+  }
+  
+  return(
+    <>
+{/*     
     <h1>{nome} Page</h1>
-    <button onClick={trocarTexto}>Trocar Texto</button>
-    <button onClick={fuiAbandonada}>Fui Abandonada</button>
+    <button onClick={trocartexto}>Mudar Nome</button>
     <button onClick={() => {
       return setNome("Yahoo")
-    }}>Trocar Texto</button>
-
+    }}> Mudar Nome</button>
+  
+    
     <br />
-    {/* evento - evento disparado: change*/ }
-    {/* target - quem disparou o evento*/ }
-    {/* value - valor do input que disparou o evento change*/ }
-    <input 
-    type="text" onBlur={fuiAbandonada} 
-    onChange={(evento) => setNome(evento.target.value  )} /> 
+     */}
+    {/* evento - evento disparado: change
+    target - elemento que disparou o evento: input
+    value - valor do input: texto digitado */}
 
-    <Contador   />
+    {/* <input type="text" onblur={fuiAbandonado}
+     onChange={(evento) => setNome(evento.target.value)} />
+
+
+
+    <Contador />
+      <br /> <br />
+      <p>Lorem ipsum <strong>{nome}</strong> dolor sit amet</p> */}
+      {/* <CadFruta /> */}
+
+    <button onClick={() => {
+        setMostar(!mostrar);
+    }}>Mostrar / Ocultar</button>
+    {mostrar && <CicloDeVida/>}
     </>
-  );
+  );  
 }
 
-export default App
+export default App;
