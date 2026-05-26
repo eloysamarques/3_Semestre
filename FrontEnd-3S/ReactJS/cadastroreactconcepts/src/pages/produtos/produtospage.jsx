@@ -1,145 +1,301 @@
-import { useEffect, useState } from "react";
-import "./produtospage.css";
-import fotoProduto from "/images/hero.png";
+import { useEffect, useState } from "react"
+import './produtospage.css'
+import axios from "axios"
+import api from "../../Services/services"
 
-const ProdutosPage = () => {
-    //states
-    const [listaProdutos, setListaProdutos] = useState([]);
-    const [titulo, setTitulo] = useState("")
-    const [descricao, setDescricao] = useState("")
-    const [preco, setPreco] = useState(0)
-    const [imagem, setImagem] = useState("hero.png")
+export const Produtos = () => {
 
-useEffect( () => {
+  // LISTA DE PRODUTOS
+  const [listaproduto, setListaProduto] = useState([])
+
+  // CAMPOS DO FORMULÁRIO
+  const [produtos, setProduto] = useState("")
+  const [preco, setPreco] = useState("")
+  const [descricao, setDescricao] = useState("")
+  const [imagem, setImagem] = useState("")
+
+  // CONTROLE DE EDIÇÃO
+  const [editar, setEditar] = useState(false)
+
+  // ID DO PRODUTO QUE ESTÁ SENDO EDITADO
+  const [idEditar, setIdEditar] = useState(null)
+
+  // BUSCAR DADOS
+  useEffect(() => {
     getDados()
+  }, [])
 
-}, [])
+  // PEGAR PRODUTOS
+  const getDados = async () => {
 
-const cadastrar = async (e) => {
-    e.preventDefault() // nao deixa o fomrulario ser postado
+    try {
 
-    // validar os dados
-    if (titulo.trim().length == 0  || 
-        descricao.trim().length == 0 ||
-        isNaN(preco)
-    ) { //se deixou de preencher algum campo
-        alert("Preencher todos os campos corretamente");
-        return false;
+      const retornoAPI = await api.get(
+        "http://localhost:3000/produtos"
+      )
+
+      setListaProduto(retornoAPI.data)
+
+    } catch (error) {
+
+      console.error(
+        "Erro ao buscar dados:",
+        error
+      )
+    }
+  }
+  // CADASTRAR
+  const handleCadastrar = async (e) => {
+
+    e.preventDefault()
+
+    // VALIDAÇÃO
+    if (
+      produtos.trim() === "" ||
+      descricao.trim() === "" ||
+      isNaN(preco) ||
+      preco <= 0
+    ) {
+      alert("Preencha todos os campos corretamente")
+      return
     }
 
-    // cadastrar na API
+    // OBJETO
     const objProduto = {
-        titulo,
-        descricao,
-        preco,
-        imagem
+
+      produtos: produtos,
+      descricao: descricao,
+      preco: parseFloat(preco),
+      imagem: imagem
     }
 
-    console.log(objProduto);
-    const retornoAPI = await fetch("http://localhost:3000/produtos", {
-        method: "POST",
-        body: JSON.stringify(objProduto),
-        headers: {
-            "Content-Type" : "application/json; charset=UTF-8"
-        }
-    })
+    try {
 
-    const produtoCadastrado = await retornoAPI.json()
-    console.log (produtoCadastrado);
-    setListaProdutos([...listaProdutos, produtoCadastrado])
+      const retornoAPI = await axios.post(
+        "http://localhost:3000/produtos",
+        objProduto
+      )
 
-    // chamar a listagem novamente
+      // ATUALIZA LISTA
+      setListaProduto([
+        ...listaproduto,
+        retornoAPI.data
+      ])
 
-    // ou ent, jogar o novo cadastro na listaProdutos
+      // LIMPA FORMULÁRIO
+      limparFormulario()
 
-}
+      alert(
+        "Produto cadastrado com sucesso!"
+      )
 
-const deletar = async (id) => {
-        // fazer o fetch para apagar
-            const retornoAPI = await fetch(`http://localhost:3000/produtos/${id}`, {
-            method: "delete",
-        })
-        getDados();
-        
+    } catch (error) {
 
-        
-}
-
-const getDados = async () => {
-        try {
-            const retornoAPI = await fetch("http://localhost:3000/produtos")
-            const dados = await retornoAPI.json()
-            // console.log(dados);
-            setListaProdutos(dados)
-        } catch (error) {
-        console.log(error)
-        }
+      console.error(
+        "Erro ao cadastrar:",
+        error
+      )
     }
+  }
+
+  // EDITAR
+  const editarProduto = async (e) => {
+
+    e.preventDefault()
+
+    const objProduto = {
+      produtos: produtos,
+      descricao: descricao,
+      preco: parseFloat(preco),
+      imagem: imagem
+    }
+
+    try {
+
+      const retornoAPI = await axios.put(
+        `http://localhost:3000/produtos/${idEditar}`,
+        objProduto
+      )
+
+      console.log(retornoAPI)
+
+      if (retornoAPI.status == 200) {
+
+        
+        // ATUALIZA LISTA
+        getDados()
+        // DESATIVA EDIÇÃO
+        setEditar(false)
+        // LIMPA FORMULÁRIO
+        limparFormulario()
+        alert("Produto atualizado!")
+      }
+
+    } catch (error) {
+      alert("Erro ao editar: ", error)
+    }
+  }
+
+  // LIMPAR FORMULÁRIO
+  function limparFormulario() {
+
+    setProduto("")
+    setDescricao("")
+    setImagem("")
+    setPreco("")
+  }
+
+  // DELETAR
+  const deletar = async (id) => {
+
+    const retornoAPI = await axios.delete(
+      `http://localhost:3000/produtos/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
+
+    getDados()
+  }
 
   return (
-    <>
-      <h1 className="Titulo">Página de Produtos</h1>
 
-<form action="" onSubmit={cadastrar}>
-    <div className="linha">
-      <label htmlFor="titulo">Título</label>
-      <input
-        type="text"
-        placeholder="Digite o título"
-        id="titulo"
-        onChange={(e) => {
-          setTitulo(e.target.value)
-        }}
-      />
-    </div>
+    <section className="sessao-cadastro">
 
-    <div className="linha">
-      <label htmlFor="descricao">Descrição</label>
-      <input
-        type="text"
-        placeholder="Digite a descrição"
-        id="descricao"
-        onChange={(e) => {
-          setDescricao(e.target.value)
-        }}
-      />
-    </div>
+      <h1 className="Titulo">
+        Produtos
+      </h1>
 
-    <div className="linha">
-      <label htmlFor="preco">Preço</label>
-      <input
-        type="text"
-        placeholder="Digite o preço"
-        id="preco"
-        onChange={(e) => {
-          setPreco(parseFloat(e.target.value))
-        }}
-      />
-    </div>
-    <button>Cadastrar</button>
-</form>
+      {/* FORMULÁRIO */}
+      <div className="formulario">
 
-      <section className="listagem">
-        {listaProdutos.map((p) => {
-          return (
-            <article className="produtos" key={p.id}>
-              <img className="foto-produto" src={fotoProduto} alt="" />
-              <h2>{p.titulo}</h2>
-              <p>R${p.preco}</p>
-              <p>{p.descricao}</p>
+        <form
+          onSubmit={
+            editar
+              ? editarProduto
+              : handleCadastrar
+          }
+        >
 
-              <a href="" onClick={(e) => {
+          <fieldset className="cadastro">
+
+            {/* NOME */}
+            <input
+              type="text"
+              placeholder="Digite o nome do produto"
+              className="cadastro_entrada"
+              value={produtos}
+              onChange={(e) =>
+                setProduto(e.target.value)
+              }
+            />
+
+            {/* PREÇO */}
+            <input
+              type="number"
+              step="0.01"
+              placeholder="Digite o preço do produto"
+              className="cadastro_entrada"
+              value={isNaN(preco) ? 0 : preco}
+              onChange={(e) =>
+                setPreco(parseFloat(e.target.value))
+              }
+            />
+
+            {/* IMAGEM */}
+            <input
+              type="text"
+              placeholder="Coloque a URL da imagem"
+              className="cadastro_entrada"
+              value={imagem}
+              onChange={(e) =>
+                setImagem(e.target.value)
+              }
+            />
+
+            {/* DESCRIÇÃO */}
+            <input
+              type="text"
+              placeholder="Coloque a descrição do produto"
+              className="cadastro_entrada"
+              value={descricao}
+              onChange={(e) =>
+                setDescricao(e.target.value)
+              }
+            />
+
+            {/* BOTÃO */}
+            <button
+              type="submit"
+
+              className="cadastro_cadastrar"
+            >
+              {
+                editar ? "Salvar Alterações" : "Cadastrar"
+              }
+
+
+            </button>
+              {editar && <button className="cadastro_cadastrar" onClick={(e) => {e.preventDefault(); setEditar(false); limparFormulario()}}> Cancelar</button>}
+
+          </fieldset>
+
+        </form>
+
+      </div>
+
+      {/* LISTAGEM */}
+      <ul className="listagem">
+
+        {listaproduto.map((p) => (
+
+          <article
+            key={p.id}
+            className="produtos">
+
+            {/* IMAGEM */}
+            <img
+              src={p.imagem} alt={p.produtos} className="imagem_produto"
+            />
+
+            {/* TEXTO */}
+            <p> <strong>Produto:</strong> {" "} {p.produtos} </p>
+
+            <p> <strong>Preço:</strong> {" "}R$ {p.preco} </p>
+
+            <p> <strong>Descrição:</strong> {" "} {p.descricao}</p>
+
+            {/* APAGAR */}
+            <a
+              href="" onClick={(e) => {
                 e.preventDefault()
                 deletar(p.id)
-              }}>Apagar</a>
+              }}
+            >
+              Apagar
+            </a>
 
-            </article>
-          );
-        })}
+            {/* EDITAR */}
+            <a
+              href="" onClick={(e) => {
+                e.preventDefault()
+                setEditar(true)
+                setIdEditar(p.id)
+                setProduto(p.produtos)
+                setImagem(p.imagem)
+                setDescricao(p.descricao)
+                setPreco(p.preco)
+              }}
+            >
+              Editar
+            </a>
 
-      </section>
-    </>
-  );
-};
+          </article>
 
-export default ProdutosPage;
+        ))}
+
+      </ul>
+
+    </section>
+  )
+}

@@ -1,26 +1,30 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import HomePage from './pages/home/homepage';
-import QuemSomosPage from './pages/quemsomos/quemsomospage';
-import Header from './componentes/header/header';
-import CadastroFrutasPage from './pages/cadastrofrutas/cadastrofrutas';
-import Produtos from './pages/produtos/produtospage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import './App.css'
+import './pages/produtos/produtospage'
+import HomePage from './pages/home/homepage'
+import QuemsomosPage from './pages/cadastrofrutas/cadastrofrutas'
+import Header from './componentes/header/header'  
+import CadastroFrutasPage from './pages/cadastrofrutas/cadastrofrutas'
+import { Produtos } from './pages/produtos/produtospage'
 
-export default function App() {
-  
-  return(
+function App() {
+  return (
+
+
+    //Titulo,Descrição, preço imagem
+
     <>
     <BrowserRouter>
-      <Header />
-
-      <Routes>
-        <Route element = {<HomePage/>} path="/"/>
-        <Route element = {<QuemSomosPage/>} path="/quemsomos"/> 
-        <Route element = {<CadastroFrutasPage/>} path='/cadfrutas'/>
-        <Route element = {<Produtos/>} path='/produtos'/>
-      </Routes>
-
-    </BrowserRouter>
+      <Header/>
+        <Routes>
+          <Route element={<HomePage />} path="/" />
+          <Route element={<Produtos/>} path="/Produtos"/>
+          <Route element={<QuemsomosPage />} path="/quemsomospage" />
+          <Route element={<CadastroFrutasPage/>} path="/cadastrofrutaspage"/>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
+
+export default App
