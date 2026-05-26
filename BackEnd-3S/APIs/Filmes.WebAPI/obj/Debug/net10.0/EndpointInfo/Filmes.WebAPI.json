@@ -472,10 +472,6 @@
       "GeneroDTO": {
         "type": "object",
         "properties": {
-          "idGenero": {
-            "type": "string",
-            "nullable": true
-          },
           "nome": {
             "type": "string",
             "nullable": true

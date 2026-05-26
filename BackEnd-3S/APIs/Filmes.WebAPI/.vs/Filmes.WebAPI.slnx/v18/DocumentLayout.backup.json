@@ -54,8 +54,7 @@
               "RelativeToolTip": "Models\\Genero.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T17:41:01.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T17:41:01.337Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "Controllers\\GeneroController.cs",
               "ViewState": "AgIAAC8AAAAAAAAAAAAgwDgAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T11:45:01.994Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T11:45:01.994Z"
             },
             {
               "$type": "Document",
@@ -78,7 +76,7 @@
               "RelativeDocumentMoniker": "DTO\\GeneroDTO.cs",
               "ToolTip": "C:\\Users\\7811003309\\Desktop\\3_Semestre\\BackEnd-3S\\APIs\\Filmes.WebAPI\\DTO\\GeneroDTO.cs*",
               "RelativeToolTip": "DTO\\GeneroDTO.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T11:44:08.714Z",
               "EditorCaption": ""
@@ -93,8 +91,7 @@
               "RelativeToolTip": "Controllers\\FilmeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T11:24:17.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T11:24:17.223Z"
             },
             {
               "$type": "Document",
@@ -106,8 +103,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAGwAAAAAAAAAAAAAAH0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T15:55:23.54Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-17T15:55:23.54Z"
             },
             {
               "$type": "Document",
@@ -119,8 +115,7 @@
               "RelativeToolTip": "DTO\\LoginDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T13:42:31.052Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-17T13:42:31.052Z"
             },
             {
               "$type": "Document",
@@ -132,8 +127,7 @@
               "RelativeToolTip": "Controllers\\LoginController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T14:39:01.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-05T14:39:01.352Z"
             }
           ]
         }
