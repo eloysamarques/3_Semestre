@@ -1,261 +1,229 @@
-import Header from '../../components/header/Header'
+import "./CadastroGenero.css"
+import Header from "../../components/header/Header" 
 import Footer from "../../components/footer/Footer"
-import './CadastroGenero.css'
 import Cadastro from "../../components/cadastro/Cadastro"
-import { useEffect, useState } from 'react'
-import api from '../../services/services'
-import Lista from '../../components/lista/Lista'
+import {useEffect, useState} from "react"
+import api from "../../Services/services"
+import Lista from "../../components/lista/Lista"
+//bibliotrcas de alertas
+import Swal from "sweetalert2"
+import { Alerta } from "../../alerta/Alerta"
 
-import Swal from 'sweetalert2'
-import { Alerta } from '../../alerta/Alerta'
+
+
+
 
 const CadastroGenero = () => {
 
-    const [valor, setValor] = useState("")
-    const [idEditar, setIdEditar] = useState("")
-    const [editar, setEditar] = useState(false)
-    const [listaGeneros, setListaGeneros] = useState([])
+const [valor, setValor] = useState("")
+const [idEditar, setIdEditar] = useState(0)
 
-    const cadastrarGenero = async (e) => {
+const [editar, setEditar] = useState(false);
+const [listaGeneros, setListaGeneros] = useState([])
 
-        e.preventDefault()
+const cadastrarGenero = async (e) => {
 
-        if (valor.trim().length === 0) {
-
-            const retornoAlerta = await Alerta({
-                title: "Cadastro de gênero",
-                text: "Gênero deve ser preenchido",
-                icon: "warning",
-                confirmButtonText: "OK",
-            })
-
-            console.log(retornoAlerta)
-
-            return false
-        }
-
-        const objCadastro = {
-            nome: valor
-        }
-
-        try {
-
-            const retornoAPI = await api.post(
-                "/Genero",
-                objCadastro
-            )
-
-            if (retornoAPI.status === 201) {
-
-                Alerta({
-                    title: "Cadastro gênero",
-                    text: `Gênero (${valor}) cadastrado com sucesso!`,
-                    icon: "success",
-                    confirmButtonText: "OK",
-                })
-
-                limpaFormulario()
-                getGeneros()
-            }
-
-        } catch (error) {
-
-            Alerta({
-                title: "Erro",
-                text: "Erro na chamada da API",
-                icon: "error",
-                confirmButtonText: "OK",
-            })
-
-            console.log(error)
-        }
+    e.preventDefault();
+    if(valor.trim().length == 0)
+    {  
+        Alerta({
+            title : "Cadastro De Gênero",
+            text : "Gênero deve ser preenchido antes de cadastrar!",
+            icon :"warning",
+            confirmButtonText: "Ok",
+        });
+        
+        
+        // alert("Gênero deve ser preenchido antes de cadastrar")
+        return false
     }
 
-    const editarGenero = async (e) => {
-
-        e.preventDefault()
-
-        if (valor.trim().length === 0) {
-
-            Alerta({
-                title: "Erro",
-                text: "Gênero deve ser preenchido",
-                icon: "error",
-                confirmButtonText: "OK",
-            })
-
-            return
-        }
-
-        const objEditar = {
-            idGenero: idEditar,
-            nome: valor
-        }
-
-        try {
-
-            const retornoAPI = await api.put(
-                `/Genero/${idEditar}`,
-                objEditar
-            )
-
-            if (
-                retornoAPI.status === 200 ||
-                retornoAPI.status === 204
-            ) {
-
-                Alerta({
-                    title: "Sucesso",
-                    text: "Gênero editado com sucesso!",
-                    icon: "success",
-                    confirmButtonText: "OK",
-                })
-
-                limpaFormulario()
-                getGeneros()
-            }
-
-        } catch (error) {
-
-            Alerta({
-                title: "Erro",
-                text: "Erro na chamada da API",
-                icon: "error",
-                confirmButtonText: "OK",
-            })
-
-            console.log(error)
-        }
+    const objetoCadastro = {
+        nome : valor
     }
 
-    const excluirGenero = async (item) => {
+    try {
+     const retornoAPI = await api.post("/Genero", objetoCadastro)
 
-        const result = await Alerta({
-            title: "Cadastro de gênero",
-            text: `Deseja realmente excluir o gênero (${item.nome})?`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Confirmar exclusão!",
-            cancelButtonText: "Cancelar",
+     if (retornoAPI.status == 201) {
+
+        Alerta({
+            title : "Cadastro De Gênero",
+            text : `Gênero(${objetoCadastro.nome}) cadastrado com sucesso`,
+            icon : "success",
+            confirmButtonText: "OK"
+        });
+        
+        limparFormulario();
+        getGeneros();
+     }else{
+         Alerta({
+            title: "Cadastro De Gênero",
+            text:`Erro na chamada da API`,
+            icon:"error",
+            confirmButtonText: "OK"
         })
+        // alert("Houve algum problema ao cadastrar!")
+     }
 
-        if (!result.isConfirmed) {
-            return
+
+    } catch (error) {
+        Alerta(
+        {
+            title: "Cadastro De Gênero",
+            text:`Erro na chamada da API`,
+            icon:"error",
+            confirmButtonText: "OK"
+        })
+        
+    }
+    
+}
+
+const limparFormulario = () => {
+    setValor("");
+    setEditar(false)
+    setIdEditar(0)
+}
+
+const preEditar = (item) => {
+    
+    setIdEditar(item.idGenero)
+    setValor(item.nome)
+    setEditar(true)
+    console.log(item)
+}
+const editarGenero = async (e) => {
+    e.preventDefault()
+    // alert(`Agora sim, bora editar: ${valor} | Id: ${idEditar}`)
+    const objEditar ={
+        nome : valor
+    }
+    try {
+        const retornoAPI = await api.put(`/Genero/${idEditar}`, objEditar)
+        console.log(retornoAPI)
+        if (retornoAPI.status == 204) {
+
+             Alerta({
+            title: "Cadastro De Gênero",
+            text:`Genero (${objEditar.nome}) Gênero Alterado com sucesso`,
+            icon:"success",
+            confirmButtonText: "OK"
+        })
+            limparFormulario();
+            getGeneros()
+        }else{
+            Alerta(
+        {
+            title: "Cadastro De Gênero",
+            text:`Algum Problema aconteceu ao editar`,
+            icon:"error",
+            confirmButtonText: "OK"
+
+            
+        })
+            
         }
+    } catch (error) {
+            Alerta(
+        {
+            title: "Cadastro De Gênero",
+            text:`Erro ao chamar a API`,
+            icon:"error",
+            confirmButtonText: "OK"
+        })
+    }
+}
 
-        try {
 
-            const retornoAPI = await api.delete(
-                `/Genero/${item.idGenero}`
-            )
+const excluirGenero = async (item) => {
+    let confirmaExclusao = false
 
-            if (
-                retornoAPI.status === 204 ||
-                retornoAPI.status === 200
-            ) {
+    const result = await Alerta({
+    title: "Cadastro de Gênero",
+    text: `Deseja realmente apagar o gênero ${item.nome}`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Confirmar Exclusão",
+    cancelButtonText: "Cancelar",
+})
 
-                Alerta({
-                    title: "Sucesso",
-                    text: "Gênero excluído com sucesso!",
-                    icon: "success",
-                    confirmButtonText: "OK",
-                })
+if (!result.isConfirmed) {
+    return false
+}
 
-                getGeneros()
-            }
+//    if (!confirm(`Deseja realmente apagar o gênero(${item.nome})`)) {
+//     return false
+//    }    
+    try {
+        const retornoAPI = await api.delete(`/Genero/${item.idGenero}`)
 
-        } catch (error) {
-
-            Alerta({
-                title: "Erro",
-                text: "Não é possível excluir esse gênero, pois ele está vinculado a um filme!",
-                icon: "error",
-                confirmButtonText: "OK",
-            })
-
-            console.log(error)
+        if (retornoAPI.status == 204 || retornoAPI.status == 200 ) {
+            
+            limparFormulario();
+            getGeneros()
+            console.log(retornoAPI)
         }
+    } catch (error) {} 
+}
+
+
+
+useEffect( () => {
+    getGeneros();
+}, [])
+
+const getGeneros = async  () => {
+    
+    try {
+        const retornoAPI = await api.get("/Genero")
+        const dados = retornoAPI.data
+         const generosOrdenados = dados.sort((a, b) =>
+            a.nome.localeCompare(b.nome)
+        )
+        setListaGeneros(generosOrdenados)
+    } catch (error) {   
+        alert("Erro ao buscar gêneros: " + error)
     }
-
-    const preEditar = (item) => {
-
-        setValor(item.nome)
-        setEditar(true)
-        setIdEditar(item.idGenero)
-
-        console.log(item)
-    }
-
-    const limpaFormulario = () => {
-
-        setValor("")
-        setEditar(false)
-        setIdEditar("")
-    }
-
-    const getGeneros = async () => {
-
-        try {
-
-            const retornoAPI = await api.get("/Genero")
-
-            setListaGeneros(retornoAPI.data)
-
-        } catch (error) {
-
-            Alerta({
-                title: "Erro",
-                text: "Erro ao buscar os gêneros",
-                icon: "error",
-                confirmButtonText: "OK",
-            })
-
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-
-        getGeneros()
-
-    }, [])
+    
+}
 
     return (
-        <>
-            <Header />
 
-            <main>
+        <><Header /> 
+        
+        <main>
+            <Cadastro 
+            tituloCadastro="Cadastro de Genero"
+            visibilidade="none"
+            placeholder= "gênero"
+            valor={valor}
+            //função que muda o state
+            cancelarEdicao={limparFormulario}
+            setValor={setValor}
+            funcCadastro={editar ? editarGenero : cadastrarGenero}
+            btnEditar={editar}
+            
 
-                <Cadastro
-                    tituloCadastro="Cadastro de Gêneros"
-                    visibilidade="none"
-                    placeholder="gênero"
-                    valor={valor}
-                    cancelarEdicao={limpaFormulario}
-                    setValor={setValor}
-                    funcCadastro={
-                        editar
-                            ? editarGenero
-                            : cadastrarGenero
-                    }
-                    btnEditar={editar}
-                />
+            />
 
-                <Lista
+             <Lista
                     tituloLista="Lista de Gêneros"
                     visibilidade="none"
+
+                    //Chama o método para validar:
                     lista={listaGeneros}
+                    //Identifica o tipo de lista:
                     tipoLista="genero"
-                    funcExcluir={excluirGenero}
-                    funcEditar={preEditar}
+                    funcExcluir = {excluirGenero}
+                    funcEditar = {preEditar}
+                    
                 />
+        </main>
+         <Footer /></>
 
-            </main>
-
-            <Footer />
-        </>
     )
 }
 

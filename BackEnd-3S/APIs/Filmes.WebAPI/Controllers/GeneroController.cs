@@ -66,11 +66,16 @@ public class GeneroController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Put(Guid id, Genero generoAtualizado)
+    public IActionResult Put(Guid id, GeneroDTO generoAtualizado)
     {
         try
         {
-            _generoRepository.AtualizarIdUrl(id, generoAtualizado);
+
+            var genero = new Genero
+            {
+                Nome = generoAtualizado.Nome
+            };
+            _generoRepository.AtualizarIdUrl(id, genero);
             return NoContent();
         }
         catch (Exception e)

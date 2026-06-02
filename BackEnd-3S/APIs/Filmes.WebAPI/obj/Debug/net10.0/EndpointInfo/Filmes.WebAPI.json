@@ -310,17 +310,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Genero"
+                "$ref": "#/components/schemas/GeneroDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Genero"
+                "$ref": "#/components/schemas/GeneroDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Genero"
+                "$ref": "#/components/schemas/GeneroDTO"
               }
             }
           }

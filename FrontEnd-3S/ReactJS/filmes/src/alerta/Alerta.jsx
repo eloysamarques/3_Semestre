@@ -15,10 +15,10 @@ export const Alerta = ({
         title: title,
         text: text,
         icon: icon,
-        showCancelButton: showCancelButton != null ? showCancelButton : undefined,
-        confirmButtonColor,
-        cancelButtonColor,
-        confirmButtonText: confirmButtonText != null ? confirmButtonText : undefined,
-        cancelButtonText: cancelButtonText != null ? cancelButtonText : "Cancelar"
+        showCancelButton: showCancelButton,
+        confirmButtonText: confirmButtonText,
+        cancelButtonText: cancelButtonText,
+        confirmButtonColor: confirmButtonColor,
+        cancelButtonColor: cancelButtonColor,
     })
 } 

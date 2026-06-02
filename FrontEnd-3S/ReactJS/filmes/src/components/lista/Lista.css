@@ -101,4 +101,25 @@
     width: fit-content;
 }
   
+img.img_cartaz{
+    height: 150px;
+    width: 100px;
+    object-fit: cover;
+    
+}
 
+.label_image{
+    /* padding: 5px 100px; */
+    width: 200px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    background-color: #73061B;
+    color: white;
+    border-radius: 6px;
+    /* Negrito */
+    font-weight: bolder;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
